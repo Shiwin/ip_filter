@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+#project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(ip_filter VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 17)     
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -16,29 +17,22 @@ find_package(GTest REQUIRED)
 
 configure_file(version.h.in version.h)
 
-add_executable(helloworld_cli main.cpp)
-
-add_library(helloworld lib.cpp)
+add_executable(ip_filter_cli main.cpp)
 
 add_executable(test_version test_version.cpp)
 
-set_target_properties(helloworld_cli helloworld test_version PROPERTIES
+set_target_properties(ip_filter_cli test_version PROPERTIES
   CXX_STANDARD 17
   CXX_STANDARD_REQUEIRED ON
   COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
   )
 
 target_link_libraries(test_version
-  helloworld
   GTest::GTest
   GTest::Main
   )
 
-target_link_libraries(helloworld_cli
-  helloworld
-  )
-
-install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+install(TARGETS ip_filter_cli RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 

@@ -2,7 +2,7 @@ language: cpp
 before_script:
 - pip3 install conan
 script:
-- conan conan install -s build_type=Release  -s compiler.libcxx=libstdc++11 .
+- conan install --build=missing -s build_type=Release -s compiler.cppstd=17 .
 - cmake -DCMAKE_BUILD_TYPE=Release .
 - cmake --build .
 - cmake --build . --target test
